@@ -275,6 +275,21 @@
 || 
 || 0 persons found!
 || ===================================================
+|| Enter command: || [Command entered:  last]
+|| Address book is empty!
+|| ===================================================
+|| Enter command: || [Command entered:  add Foo p/12345678 e/user@domain.com]
+|| New person added: Foo, Phone: 12345678, Email: user@domain.com
+|| ===================================================
+|| Enter command: || [Command entered:  last]
+|| Foo
+|| 12345678
+|| user@domain.com
+|| Last person added listed!
+|| ===================================================
+|| Enter command: || [Command entered:  clear]
+|| Address book has been cleared!
+|| ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book... Good bye!
 || ===================================================

@@ -14,7 +14,7 @@
   list
 
 ##########################################################
-# test add person command, setup state for futuer tests
+# test add person command, setup state for future tests
 ##########################################################
 
   # should catch invalid args format
@@ -98,6 +98,16 @@
   # clears all
   clear
   list
+
+##########################################################
+# test last command
+##########################################################
+
+  # should display last correctly
+  last
+  add Foo p/12345678 e/user@domain.com
+  last
+  clear
 
 ##########################################################
 # test exit command
