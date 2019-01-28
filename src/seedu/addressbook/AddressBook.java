@@ -90,6 +90,8 @@ public class AddressBook {
     private static final String MESSAGE_STORAGE_FILE_CREATED = "Created new empty storage file: %1$s";
     private static final String MESSAGE_WELCOME = "Welcome to your Address Book!";
     private static final String MESSAGE_USING_DEFAULT_FILE = "Using default storage file : " + DEFAULT_STORAGE_FILEPATH;
+    private static final String MESSAGE_LAST_PERSON_LISTED_SUCCESS = "Last person added listed!";
+    private static final String MESSAGE_LAST_PERSON_LISTED_FAILURE = "Address book is empty!";
 
     // These are the prefix strings to define the data type of a command parameter
     private static final String PERSON_DATA_PREFIX_PHONE = "p/";
@@ -104,6 +106,10 @@ public class AddressBook {
                                                       + PERSON_DATA_PREFIX_PHONE + "PHONE_NUMBER "
                                                       + PERSON_DATA_PREFIX_EMAIL + "EMAIL";
     private static final String COMMAND_ADD_EXAMPLE = COMMAND_ADD_WORD + " John Doe p/98765432 e/johnd@gmail.com";
+
+    private static final String COMMAND_LAST_WORD = "last";
+    private static final String COMMAND_LAST_DESC = "Displays the latest person to be added to the addres book.";
+    private static final String COMMAND_LAST_EXAMPLE = COMMAND_LAST_WORD;
 
     private static final String COMMAND_FIND_WORD = "find";
     private static final String COMMAND_FIND_DESC = "Finds all persons whose names contain any of the specified "
@@ -371,6 +377,8 @@ public class AddressBook {
         switch (commandType) {
         case COMMAND_ADD_WORD:
             return executeAddPerson(commandArgs);
+        case COMMAND_LAST_WORD:
+            return executeLastPerson();
         case COMMAND_FIND_WORD:
             return executeFindPersons(commandArgs);
         case COMMAND_LIST_WORD:
@@ -440,6 +448,26 @@ public class AddressBook {
     private static String getMessageForSuccessfulAddPerson(String[] addedPerson) {
         return String.format(MESSAGE_ADDED,
                 getNameFromPerson(addedPerson), getPhoneFromPerson(addedPerson), getEmailFromPerson(addedPerson));
+    }
+
+    /**
+     * Retrieves the last person added to the address book.
+     *
+     * @return feedback display message for the operation result
+     */
+    private static String executeLastPerson() {
+        ArrayList<String[]> allPersons = getAllPersonsInAddressBook();
+
+        // Check if address book is empty
+        if (allPersons.size() == 0) {
+            return MESSAGE_LAST_PERSON_LISTED_FAILURE;
+        }
+
+        int lastIndex = allPersons.size() - 1;
+        String[] lastPerson = allPersons.get(lastIndex);
+        showToUser(lastPerson);
+
+        return MESSAGE_LAST_PERSON_LISTED_SUCCESS;
     }
 
     /**
